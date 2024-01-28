@@ -15,18 +15,18 @@ job_param="$1"
 
 echo "Executing job: $job_param"
 
-profile=$(echo $job_param | cut -d '/' -f4)
+PROFILE=$(echo $job_param | cut -d '/' -f4)
 resource=$(echo $job_param | cut -d '/' -f5)
 resource_category=$(echo $resource | cut -d '-' -f1)
 resource_type=$(echo $resource | cut -d '-' -f2)
 resource_name=$(echo $resource | cut -d '-' -f3-)
 
-validate_set $s "profile" $profile
+validate_set $s "PROFILE" $PROFILE
 validate_set $s "resource_category" $resource_category
 validate_set $s "resource_type" $resource_type
 validate_set $s "resource_name" $resource_name
 
-echo "Profile: $profile"
+echo "Profile: $PROFILE"
 echo "Resource Category: $resource_category"
 echo "Resource Type: $resource_type"
 echo "Resource Name: $resource_name"
@@ -37,7 +37,7 @@ exit
 
 #to implement:
 #get_arg_from_job_ssm_parameter
-profile=$(get_arg_from_job_ssm_parameter $ssm_parameter_value "profile")
+PROFILE=$(get_arg_from_job_ssm_parameter $ssm_parameter_value "PROFILE")
 region=$(get_arg_from_job_ssm_parameter $ssm_parameter "region")
 resource_type=$(get_arg_from_job_ssm_parameter $ssm_parameter "resource_type")
 resource_category=$(get_arg_from_job_ssm_parameter $ssm_parameter "resource_category") 
@@ -46,7 +46,7 @@ resource_category=$(get_arg_from_job_ssm_parameter $ssm_parameter "resource_cate
 #get_parameters
 parameters=$(get_parameters $ssm_parameter_value)
 
-validate_set $ssm_parameter_name "profile" $profile
+validate_set $ssm_parameter_name "PROFILE" $PROFILE
 validate_set $ssm_parameter_name "region" $region
 validate_set $ssm_parameter_name "resource_type" $resource_type
 validate_set  $ssm_parameter_name "resource_category" $resource_category
